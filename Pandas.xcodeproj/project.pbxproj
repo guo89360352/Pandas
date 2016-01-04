@@ -30,6 +30,8 @@
 		7AB74C851C3A66F400F27D26 /* ft_person_normal_ic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB74C791C3A66F400F27D26 /* ft_person_normal_ic@3x.png */; };
 		7AB74C861C3A66F400F27D26 /* ft_person_selected_ic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB74C7A1C3A66F400F27D26 /* ft_person_selected_ic@2x.png */; };
 		7AB74C871C3A66F400F27D26 /* ft_person_selected_ic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB74C7B1C3A66F400F27D26 /* ft_person_selected_ic@3x.png */; };
+		7AB74C8B1C3A766A00F27D26 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB74C891C3A766A00F27D26 /* MainTableViewCell.m */; };
+		7AB74C8C1C3A766A00F27D26 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB74C8A1C3A766A00F27D26 /* MainTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,9 @@
 		7AB74C791C3A66F400F27D26 /* ft_person_normal_ic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ft_person_normal_ic@3x.png"; sourceTree = "<group>"; };
 		7AB74C7A1C3A66F400F27D26 /* ft_person_selected_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ft_person_selected_ic@2x.png"; sourceTree = "<group>"; };
 		7AB74C7B1C3A66F400F27D26 /* ft_person_selected_ic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ft_person_selected_ic@3x.png"; sourceTree = "<group>"; };
+		7AB74C881C3A766A00F27D26 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
+		7AB74C891C3A766A00F27D26 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
+		7AB74C8A1C3A766A00F27D26 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
 		D3ECBF67D39F69274FCA022A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				7AB74B031C3A506300F27D26 /* Main.storyboard */,
+				7AB74C881C3A766A00F27D26 /* MainTableViewCell.h */,
+				7AB74C891C3A766A00F27D26 /* MainTableViewCell.m */,
+				7AB74C8A1C3A766A00F27D26 /* MainTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB74C8C1C3A766A00F27D26 /* MainTableViewCell.xib in Resources */,
 				7AB74C7E1C3A66F400F27D26 /* ft_found_selected_ic@2x.png in Resources */,
 				7AB74C7D1C3A66F400F27D26 /* ft_found_normal_ic@3x.png in Resources */,
 				7AB74B041C3A506300F27D26 /* Main.storyboard in Resources */,
@@ -419,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB74C8B1C3A766A00F27D26 /* MainTableViewCell.m in Sources */,
 				7A83BA081C3A3AFB00A168D4 /* AppDelegate.m in Sources */,
 				7AB74AFE1C3A4E2700F27D26 /* DiscoverViewController.m in Sources */,
 				7AB74B001C3A4E2700F27D26 /* MineViewController.m in Sources */,
