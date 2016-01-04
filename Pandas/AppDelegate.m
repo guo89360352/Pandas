@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
 
 
 @interface AppDelegate ()
@@ -21,7 +20,45 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    //UITableBarControllers
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+ 
+    //创建被tabBarVC管理的视图控制器
+    //主页
+    UIStoryboard *mainStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
+    UINavigationController *mainNAV = mainStory.instantiateInitialViewController;
+    mainNAV.tabBarItem.image = [UIImage imageNamed:@"ft_home_normal_ic"];
+    //设置选中图片按照图片原始状态显示
+    UIImage *mainsec =[UIImage imageNamed:@"ft_home_selected_ic"];
+    mainNAV.tabBarItem.selectedImage = [mainsec imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //规定图片显示的位置：上左下右的顺序设置
+       mainNAV.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    
+    //发现
+    UIStoryboard *discoverStro = [UIStoryboard storyboardWithName:@"Discover" bundle:nil];
+    
+    UINavigationController *discoverNAV = discoverStro.instantiateInitialViewController;
+   
+    discoverNAV.tabBarItem.image = [UIImage imageNamed:@"ft_found_normal_ic"];
+    discoverNAV.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    UIImage *sec =[UIImage imageNamed:@"ft_found_selected_ic"];
+    discoverNAV.tabBarItem.selectedImage = [sec imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+    //我
+    UIStoryboard *mineStro = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
+    
+    UINavigationController *mineNAV = mineStro.instantiateInitialViewController;
+    mineNAV.tabBarItem.image = [UIImage imageNamed:@"ft_person_normal_ic"];
+    mineNAV.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    
+    UIImage *minesec =[UIImage imageNamed:@"ft_person_selected_ic"];
+    mineNAV.tabBarItem.selectedImage = [minesec imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //添加被管理的视图控制器
+    tabBarVC.viewControllers = @[mainNAV,discoverNAV,mineNAV];
+    
+    
+    self.window.rootViewController = tabBarVC;
 
     
     
