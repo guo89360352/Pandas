@@ -10,6 +10,7 @@
 #import "MainTableViewCell.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "MainModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -21,7 +22,7 @@
 //推荐专题数据
 @property (nonatomic, strong) NSMutableArray *themeArray;
 
-//@property (nonatomic, strong) NSMutableArray *adArray;
+@property (nonatomic, strong) NSMutableArray *adArray;
 
 @end
 
@@ -92,26 +93,93 @@
     return 203;
     
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//
-//   
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+
+    return 25;
+}
 //自定义分区头部
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//
-//
-//    return view;
-//
-//}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] init];
+    
+    UIImageView *sectionView= [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-160, 5, 320, 16)];
+
+    UIImage *image;
+    if (section == 0) {
+             image = [UIImage imageNamed:@"home_recommed_ac"];
+
+    } else {
+
+        image = [UIImage imageNamed:@"home_recommd_rc"];
+
+    }
+   
+    sectionView.image = image;
+    [view addSubview:sectionView];
+    return view;
 
 
+}
+
+//自定义tableview的区头
 -(void)configTableViewHeaderView{
 
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 343)];
-    view.backgroundColor = [UIColor grayColor];
+   // view.backgroundColor = [UIColor grayColor];
+    
+    UIScrollView *carourselView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 186)];
+    //让scroll能够滑动
+    carourselView.contentSize = CGSizeMake(self.adArray.count * [UIScreen mainScreen].bounds.size.width, 186);
+    for (int i = 0; i < self.adArray.count ; i++) {
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * i, 0, [UIScreen mainScreen].bounds.size.width, 186)];
+        [imageV sd_setImageWithURL:[NSURL URLWithString:self.adArray[i]] placeholderImage:nil];
+        [carourselView addSubview:imageV];
+    }
+    [view addSubview:carourselView];
     self.tableView.tableHeaderView = view;
+    
+    
+    for (int i = 0; i < 4; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(i * [UIScreen mainScreen].bounds.size.width / 4, 186, [UIScreen mainScreen].bounds.size.width / 4, [UIScreen mainScreen].bounds.size.width / 4);
+        NSString *imageStr = [NSString stringWithFormat:@"home_icon_%02d",i + 1];
+        [btn setImage:[UIImage imageNamed:imageStr] forState:UIControlStateNormal];
+        btn.tag = i;
+        [btn addTarget:self action:@selector(mainActivity:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:btn];
+        
+        
+    }
+    
+    UIButton *activitybtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    activitybtn.frame = CGRectMake(0, 176+[UIScreen mainScreen].bounds.size.width / 4, [UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.width / 4);
+   
+    [activitybtn setImage:[UIImage imageNamed:@"home_00"] forState:UIControlStateNormal];
+    activitybtn.tag = 100;
+    [activitybtn addTarget:self action:@selector(hotActivity:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:activitybtn];
+    
+    
+    UIButton *themeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    themeBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2, 176+[UIScreen mainScreen].bounds.size.width / 4, [UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.width / 4);
+    
+    [themeBtn setImage:[UIImage imageNamed:@"home_01"] forState:UIControlStateNormal];
+    themeBtn.tag = 101;
+    [themeBtn addTarget:self action:@selector(hotActivity:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:themeBtn];
+    
 
 }
+-(void)hotActivity:(UIButton *)btn{
+
+
+
+}
+-(void)mainActivity:(UIButton *)btn{
+    
+    
+    
+}
+
 -(void)requestModel{
     
     NSString *urlString = @"http://e.kumi.cn/app/v1.3/index.php?_s_=02a411494fa910f5177d82a6b0a63788&_t_=1451307342&channelid=appstore&cityid=1&lat=34.62172291944134&limit=30&lng=112.4149512442411&page=1";
@@ -136,12 +204,10 @@
             [self.listArray addObject:self.activityArray];
             //广告
             NSArray *adDataArray = dic[@"adData"];
+            for (NSDictionary *dic01 in adDataArray) {
+                [self.adArray addObject:dic01[@"url"]];
+            }
             
-            //            for (NSDictionary *dic01 in adDataArray) {
-            //                MainModel *model = [[MainModel alloc] initWithDictionary:dic01];
-            //                [self.adArray addObject:model];
-            //            }
-            //            [self.listArray addObject:self.adArray];
             
             //推荐专题
             NSArray *rcDataArray = dic[@"rcData"];
@@ -155,6 +221,8 @@
             [self.tableView reloadData];
             
             
+            //拿到数据之后重新刷新
+            [self configTableViewHeaderView];
             
             NSString *cityName = dic[@"cityName"];
             //以请求回来的导航栏按钮标题
@@ -193,6 +261,14 @@
     }
     return _themeArray;
     
+}
+-(NSMutableArray *)adArray{
+    if (_adArray == nil) {
+        self.adArray = [NSMutableArray new];
+    }
+    return _adArray;
+
+
 }
 
 -(void)selectCity{
