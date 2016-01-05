@@ -12,6 +12,9 @@
 		7A83BA081C3A3AFB00A168D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA071C3A3AFB00A168D4 /* AppDelegate.m */; };
 		7A83BA0A1C3A3AFB00A168D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A83BA091C3A3AFB00A168D4 /* Assets.xcassets */; };
 		7A83BA0D1C3A3AFB00A168D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A83BA0B1C3A3AFB00A168D4 /* LaunchScreen.storyboard */; };
+		7AA9F50E1C3B9D21004A59FA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA9F50D1C3B9D21004A59FA /* AVFoundation.framework */; };
+		7AA9F5131C3BA073004A59FA /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F5121C3BA073004A59FA /* MainModel.m */; };
+		7AA9F5151C3BA477004A59FA /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F5141C3BA477004A59FA /* Property List.plist */; };
 		7AB74AFE1C3A4E2700F27D26 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB74AEF1C3A4E2700F27D26 /* DiscoverViewController.m */; };
 		7AB74AFF1C3A4E2700F27D26 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB74AF51C3A4E2700F27D26 /* MainViewController.m */; };
 		7AB74B001C3A4E2700F27D26 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB74AFB1C3A4E2700F27D26 /* MineViewController.m */; };
@@ -44,6 +47,10 @@
 		7A83BA091C3A3AFB00A168D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A83BA0C1C3A3AFB00A168D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A83BA0E1C3A3AFB00A168D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AA9F50D1C3B9D21004A59FA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7AA9F5111C3BA073004A59FA /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
+		7AA9F5121C3BA073004A59FA /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
+		7AA9F5141C3BA477004A59FA /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		7AB74AEE1C3A4E2700F27D26 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		7AB74AEF1C3A4E2700F27D26 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		7AB74AF41C3A4E2700F27D26 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -76,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA9F50E1C3B9D21004A59FA /* AVFoundation.framework in Frameworks */,
 				74703D3686C259B550B4CA34 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +199,9 @@
 		7AB74AF61C3A4E2700F27D26 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7AA9F5141C3BA477004A59FA /* Property List.plist */,
+				7AA9F5111C3BA073004A59FA /* MainModel.h */,
+				7AA9F5121C3BA073004A59FA /* MainModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -278,6 +289,7 @@
 		D989709C28E84AB3156CB1C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AA9F50D1C3B9D21004A59FA /* AVFoundation.framework */,
 				0D9B935C58AA38056A1627F1 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -369,6 +381,7 @@
 				7AB74C861C3A66F400F27D26 /* ft_person_selected_ic@2x.png in Resources */,
 				7AB74C7F1C3A66F400F27D26 /* ft_found_selected_ic@3x.png in Resources */,
 				7AB74C831C3A66F400F27D26 /* ft_home_selected_ic@3x.png in Resources */,
+				7AA9F5151C3BA477004A59FA /* Property List.plist in Resources */,
 				7A83BA0D1C3A3AFB00A168D4 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +447,7 @@
 				7AB74B001C3A4E2700F27D26 /* MineViewController.m in Sources */,
 				7A83BA051C3A3AFB00A168D4 /* main.m in Sources */,
 				7AB74AFF1C3A4E2700F27D26 /* MainViewController.m in Sources */,
+				7AA9F5131C3BA073004A59FA /* MainModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

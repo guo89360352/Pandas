@@ -47,7 +47,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="25P-q8-yTa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.81948194475471747" green="1" blue="0.85644819217290369" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.23529411764705882" green="0.74509803921568629" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

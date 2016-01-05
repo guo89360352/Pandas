@@ -20,7 +20,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="￥123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7QC-Pd-kP1">
                         <rect key="frame" x="0.0" y="176" width="375" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gw-KC-dTa">
@@ -28,9 +28,9 @@
                         <state key="normal" title="Button"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1223346" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTy-Ro-gyi">
-                        <rect key="frame" x="109" y="155" width="157" height="21"/>
+                        <rect key="frame" x="0.0" y="147" width="367" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -38,7 +38,7 @@
             <connections>
                 <outlet property="activiityImageView" destination="1WB-ii-ZFc" id="S7A-uA-tIb"/>
                 <outlet property="activityDisButton" destination="1gw-KC-dTa" id="Ik9-wM-hze"/>
-                <outlet property="activityNameLabel" destination="7QC-Pd-kP1" id="h3E-Fh-AgV"/>
+                <outlet property="activityNameLabel" destination="qTy-Ro-gyi" id="3gB-Ut-A1n"/>
                 <outlet property="activityPricLabel" destination="7QC-Pd-kP1" id="fG0-Pw-P1M"/>
             </connections>
             <point key="canvasLocation" x="289.5" y="413.5"/>
