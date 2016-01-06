@@ -32,8 +32,14 @@
     [self.activiityImageView sd_setImageWithURL:[NSURL URLWithString:model.image_big] placeholderImage:nil];
     self.activityNameLabel.text = model.title;
     self.activityPricLabel.text = model.price;
-    
+    if ([model.type integerValue]!=RecommendTypeActivity) {
+        self.activityDisButton.hidden = YES;
 
+    } else {
+    
+        self.activityDisButton.hidden = NO;
+    
+    }
 
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
