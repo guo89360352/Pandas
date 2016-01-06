@@ -7,6 +7,7 @@
 //
 
 #import "HotActivityViewController.h"
+#import "UIViewController+Common.h"
 
 @interface HotActivityViewController ()
 
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"热门活动";
+    [self showBackBtn];
 }
 
 - (void)didReceiveMemoryWarning {

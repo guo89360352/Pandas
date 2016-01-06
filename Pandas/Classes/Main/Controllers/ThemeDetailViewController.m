@@ -7,6 +7,7 @@
 //
 
 #import "ThemeDetailViewController.h"
+#import "UIViewController+Common.h"
 
 @interface ThemeDetailViewController ()
 
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"^_^";
+    [self showBackBtn];
 }
 
 - (void)didReceiveMemoryWarning {

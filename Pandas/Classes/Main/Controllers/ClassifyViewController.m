@@ -7,6 +7,7 @@
 //
 
 #import "ClassifyViewController.h"
+#import "UIViewController+Common.h"
 
 @interface ClassifyViewController ()
 
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"= 3 =";
+    [self showBackBtn];
 }
 
 - (void)didReceiveMemoryWarning {

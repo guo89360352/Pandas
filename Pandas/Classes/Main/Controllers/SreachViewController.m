@@ -7,6 +7,7 @@
 //
 
 #import "SreachViewController.h"
+#import "UIViewController+Common.h"
 
 @interface SreachViewController ()
 
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"T-T";
+    [self showBackBtn];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,6 +7,7 @@
 //
 
 #import "GoodActivityViewController.h"
+#import "UIViewController+Common.h"
 
 @interface GoodActivityViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self showBackBtn];
 }
 
 - (void)didReceiveMemoryWarning {

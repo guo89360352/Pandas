@@ -7,6 +7,7 @@
 //
 
 #import "SelectCityViewController.h"
+#import "UIViewController+Common.h"
 
 @interface SelectCityViewController ()
 
@@ -20,6 +21,7 @@
     
     self.navigationItem.title = @"切换城市";
     self.view.backgroundColor = [UIColor grayColor];
+    [self showBackBtn];
     
     
 }

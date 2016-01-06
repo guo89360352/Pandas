@@ -19,6 +19,7 @@
 #import "ClassifyViewController.h"
 #import "GoodActivityViewController.h"
 #import "HotActivityViewController.h"
+#import "ActivityDetailViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
@@ -32,9 +33,13 @@
 
 @property (nonatomic, strong) NSMutableArray *adArray;
 
+@property (nonatomic,strong) UIView *tableViewHeaderView;
+
 @property (nonatomic, strong) UIScrollView *carouselView;
 
 @property (nonatomic, strong) UIPageControl *pageControl;
+//定时器 ，用于滚动播放
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -52,9 +57,10 @@
     
     UIBarButtonItem *leftbtn=[[UIBarButtonItem alloc]initWithTitle:@"洛阳≡" style:UIBarButtonItemStylePlain target:self action:@selector(selectCity)];
     
-    
+  
     leftbtn.tintColor=[UIColor whiteColor];
     self.navigationItem.leftBarButtonItem=leftbtn;
+      NSLog(@"itm ==== %@", self.navigationItem.leftBarButtonItem.title);
     
     
     //导航栏上navigationItem
@@ -68,6 +74,8 @@
     
     //请求网络数据
     [self requestModel];
+    //启动定时器
+    [self startTimer];
     
 }
 #pragma mark -- 设置tableview的代理方法UITableViewDataSource
@@ -151,7 +159,7 @@
 //自定义tableview的区头
 -(void)configTableViewHeaderView{
 
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 343)];
+   self.tableViewHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 343)];
 ///添加轮播图
     self.carouselView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 186)];
     //让scroll能够滑动
@@ -170,12 +178,19 @@
     
     for (int i = 0; i < self.adArray.count ; i++) {
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth * i, 0, kScreenWidth, 186)];
-        [imageV sd_setImageWithURL:[NSURL URLWithString:self.adArray[i]] placeholderImage:nil];
+        [imageV sd_setImageWithURL:[NSURL URLWithString:self.adArray[i][@"url"]] placeholderImage:nil];
         [self.carouselView addSubview:imageV];
+        
+        UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        touchBtn.frame = imageV.frame;
+        touchBtn.tag = 100+i;
+        [touchBtn addTarget:self action:@selector(touchAdvertisement:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.carouselView addSubview:touchBtn];
     }
-    [view addSubview:self.carouselView];
-     [view addSubview:self.pageControl];
-    self.tableView.tableHeaderView = view;
+    [self.tableViewHeaderView addSubview:self.carouselView];
+     [self.tableViewHeaderView addSubview:self.pageControl];
+    self.tableView.tableHeaderView = self.tableViewHeaderView;
     
     
     for (int i = 0; i < 4; i++) {
@@ -184,8 +199,9 @@
         NSString *imageStr = [NSString stringWithFormat:@"home_icon_%02d",i + 1];
         [btn setImage:[UIImage imageNamed:imageStr] forState:UIControlStateNormal];
         btn.tag = i;
+      
         [btn addTarget:self action:@selector(mainActivity:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:btn];
+        [self.tableViewHeaderView addSubview:btn];
         
         
     }
@@ -196,7 +212,7 @@
     [activitybtn setImage:[UIImage imageNamed:@"home_00"] forState:UIControlStateNormal];
     activitybtn.tag = 100;
     [activitybtn addTarget:self action:@selector(goodActivity:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:activitybtn];
+    [self.tableViewHeaderView addSubview:activitybtn];
     
     
     UIButton *themeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -205,10 +221,71 @@
     [themeBtn setImage:[UIImage imageNamed:@"home_01"] forState:UIControlStateNormal];
     themeBtn.tag = 101;
     [themeBtn addTarget:self action:@selector(hotActivity:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:themeBtn];
+    [self.tableViewHeaderView addSubview:themeBtn];
     
 
 }
+#pragma mark ----   首页轮播图
+- (void)startTimer{
+
+    //防止定时器重复创建
+    if (self.timer != nil) {
+        return;
+    }
+    self.timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(rollAnimation) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    
+
+
+}
+- (void)rollAnimation{
+
+    //把当前page当前页加1
+    NSInteger page = (self.pageControl.currentPage + 1)% self.adArray.count;
+    self.pageControl.currentPage = page;
+    //计算出scrollView应该滚动的坐标
+    CGFloat offsetx = self.pageControl.currentPage * kScreenWidth;
+    [self.carouselView setContentOffset:CGPointMake(offsetx, 0) animated:YES];
+
+}
+//当手动去滑动scrollView的时候，定时器仍然在计算时间，可能我们刚刚滑动到下一页，定时器时间刚好触发，导致在当前页停留的时间不到2秒
+//解决方案在scrollView开始移动的时候结束定时器
+//在scrollView移动完毕的时候在启动定时器
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+
+    //停止定时器
+    [self.timer invalidate];
+    self.timer = nil;//停止定时器后并置为nil 再次启动定时器，才能保证正常执行
+
+}
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+
+    [self startTimer];
+
+}
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //获取scrollView页面宽度
+    CGFloat pageWidth = self.carouselView.frame.size.width;
+    //获取scrollView停止的偏移量
+    CGPoint offset = self.carouselView.contentOffset;
+    //由偏移量获取当前的页数
+    NSInteger pageNumber = offset.x / pageWidth;
+    
+    self.pageControl.currentPage = pageNumber;
+    
+}
+-(void)pageSelectAction:(UIPageControl *)pageC{
+    
+    //获取scrollView页面宽度
+    CGFloat pageWidth = self.carouselView.frame.size.width;
+    //由偏移量获取当前的页数
+    NSInteger pageNumber = pageC.currentPage;
+    //获取scrollView停止的偏移量
+    //
+    self.carouselView.contentOffset = CGPointMake(pageNumber * pageWidth, 0);
+    
+}
+
 //精选活动
 -(void)goodActivity:(UIButton *)btn{
     GoodActivityViewController *good = [[GoodActivityViewController alloc] init];
@@ -230,8 +307,41 @@
 
     
 }
-//网络请求
+//选择城市
+-(void)selectCity{
+    SelectCityViewController *selectCityVC = [[SelectCityViewController alloc] init];
+    [self presentViewController:selectCityVC animated:YES completion:nil];
+    
+    
+}
+//搜索关键字
+-(void)seachActivity{
+    SreachViewController *sreach = [[SreachViewController alloc] init];
+    [self.navigationController pushViewController:sreach animated:YES];
+}
 
+//广告
+-(void)touchAdvertisement:(UIButton *)adBtn{//?
+
+    //从数组中的字典里取出Type类型
+    NSString *type = self.adArray[adBtn.tag-100][@"type"];
+    if ([type integerValue] == 1) {
+ 
+        ActivityDetailViewController *activityVC = [[ActivityDetailViewController alloc] init];
+        activityVC.activityId = self.adArray[adBtn.tag-100][@"id"];
+        [self.navigationController pushViewController:activityVC animated:YES];
+  
+    }else {
+    
+        HotActivityViewController *hot = [[HotActivityViewController alloc] init];
+        [self.navigationController pushViewController:hot animated:YES];
+    
+    }
+
+}
+
+#pragma mark ---- 网络请求
+//网络请求
 -(void)requestModel{
     
 
@@ -261,7 +371,8 @@
             //广告
             NSArray *adDataArray = dic[@"adData"];
             for (NSDictionary *dic01 in adDataArray) {
-                [self.adArray addObject:dic01[@"url"]];
+                NSDictionary *dict = @{@"url":dic01[@"url"],@"type":dic01[@"type"],@"id":dic01[@"id"]};
+                [self.adArray addObject:dict];
             }
             
             
@@ -280,9 +391,10 @@
             //拿到数据之后重新刷新
             [self configTableViewHeaderView];
             
-            NSString *cityName = dic[@"cityName"];
+            NSString *cityName = dic[@"cityname"];
             //以请求回来的导航栏按钮标题
             self.navigationItem.leftBarButtonItem.title = cityName;
+            
             
         } else {
             
@@ -326,44 +438,8 @@
 
 
 }
-//选择城市
--(void)selectCity{
-    SelectCityViewController *selectCityVC = [[SelectCityViewController alloc] init];
-    [self presentViewController:selectCityVC animated:YES completion:nil];
-    
-
-}
-//搜索关键字
--(void)seachActivity{
-    SreachViewController *sreach = [[SreachViewController alloc] init];
-    [self.navigationController pushViewController:sreach animated:YES];
-}
 
 
-
-#pragma mark ----   首页轮播图
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    //获取scrollView页面宽度
-    CGFloat pageWidth = self.carouselView.frame.size.width;
-    //获取scrollView停止的偏移量
-    CGPoint offset = self.carouselView.contentOffset;
-    //由偏移量获取当前的页数
-    NSInteger pageNumber = offset.x / pageWidth;
-    
-    self.pageControl.currentPage = pageNumber;
-    
-}
--(void)pageSelectAction:(UIPageControl *)pageC{
-   
-    //获取scrollView页面宽度
-    CGFloat pageWidth = self.carouselView.frame.size.width;
-    //由偏移量获取当前的页数
-    NSInteger pageNumber = pageC.currentPage;
-    //获取scrollView停止的偏移量
-    //
-    self.carouselView.contentOffset = CGPointMake(pageNumber * pageWidth, 0);
-
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

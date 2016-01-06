@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74703D3686C259B550B4CA34 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D9B935C58AA38056A1627F1 /* libPods.a */; };
+		7A2B7BC21C3D3EEB00FFABF2 /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B7BC11C3D3EEB00FFABF2 /* UIViewController+Common.m */; };
 		7A83BA051C3A3AFB00A168D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA041C3A3AFB00A168D4 /* main.m */; };
 		7A83BA081C3A3AFB00A168D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA071C3A3AFB00A168D4 /* AppDelegate.m */; };
 		7A83BA0A1C3A3AFB00A168D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A83BA091C3A3AFB00A168D4 /* Assets.xcassets */; };
@@ -55,6 +56,8 @@
 /* Begin PBXFileReference section */
 		0D9B935C58AA38056A1627F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		535471C46C07F20EC1530AD6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7A2B7BC01C3D3EEB00FFABF2 /* UIViewController+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Common.h"; path = "../../../UIViewController+Common.h"; sourceTree = "<group>"; };
+		7A2B7BC11C3D3EEB00FFABF2 /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Common.m"; path = "../../../UIViewController+Common.m"; sourceTree = "<group>"; };
 		7A83BA001C3A3AFB00A168D4 /* Pandas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A83BA041C3A3AFB00A168D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A83BA061C3A3AFB00A168D4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 			children = (
 				7AB4DCA91C3CAE6000DDC072 /* PrefixHeader.pch */,
 				7AB4DCAA1C3CB34B00DDC072 /* HWDefine.h */,
+				7A2B7BC01C3D3EEB00FFABF2 /* UIViewController+Common.h */,
+				7A2B7BC11C3D3EEB00FFABF2 /* UIViewController+Common.m */,
 			);
 			name = Library;
 			path = Classes/Library;
@@ -525,6 +530,7 @@
 				7AB4DCB81C3CBF4700DDC072 /* ThemeDetailViewController.m in Sources */,
 				7AB4DCB21C3CBDA100DDC072 /* SreachViewController.m in Sources */,
 				7AB74AFF1C3A4E2700F27D26 /* MainViewController.m in Sources */,
+				7A2B7BC21C3D3EEB00FFABF2 /* UIViewController+Common.m in Sources */,
 				7AA9F5131C3BA073004A59FA /* MainModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
