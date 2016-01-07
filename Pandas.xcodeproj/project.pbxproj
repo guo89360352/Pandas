@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		74703D3686C259B550B4CA34 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D9B935C58AA38056A1627F1 /* libPods.a */; };
+		7A01EE8D1C3E0565004AF20E /* grayLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE8C1C3E0565004AF20E /* grayLine@2x.png */; };
+		7A01EE8F1C3E073B004AF20E /* ac_location_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE8E1C3E073B004AF20E /* ac_location_normal@2x.png */; };
+		7A01EE911C3E0741004AF20E /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE901C3E0741004AF20E /* phone@2x.png */; };
+		7A01EE931C3E096A004AF20E /* list_make_out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE921C3E096A004AF20E /* list_make_out@2x.png */; };
+		7A01EE951C3E0B61004AF20E /* ac_details_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE941C3E0B61004AF20E /* ac_details_img@2x.png */; };
+		7A01EE981C3E10F0004AF20E /* ActivityDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A01EE971C3E10F0004AF20E /* ActivityDetailView.m */; };
+		7A01EE9A1C3E1C21004AF20E /* File in Resources */ = {isa = PBXBuildFile; fileRef = 7A01EE991C3E1C21004AF20E /* File */; };
 		7A2B7BC21C3D3EEB00FFABF2 /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B7BC11C3D3EEB00FFABF2 /* UIViewController+Common.m */; };
 		7A83BA051C3A3AFB00A168D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA041C3A3AFB00A168D4 /* main.m */; };
 		7A83BA081C3A3AFB00A168D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA071C3A3AFB00A168D4 /* AppDelegate.m */; };
@@ -56,6 +63,14 @@
 /* Begin PBXFileReference section */
 		0D9B935C58AA38056A1627F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		535471C46C07F20EC1530AD6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7A01EE8C1C3E0565004AF20E /* grayLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayLine@2x.png"; sourceTree = "<group>"; };
+		7A01EE8E1C3E073B004AF20E /* ac_location_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ac_location_normal@2x.png"; sourceTree = "<group>"; };
+		7A01EE901C3E0741004AF20E /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		7A01EE921C3E096A004AF20E /* list_make_out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list_make_out@2x.png"; path = "../list_make_out@2x.png"; sourceTree = "<group>"; };
+		7A01EE941C3E0B61004AF20E /* ac_details_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ac_details_img@2x.png"; sourceTree = "<group>"; };
+		7A01EE961C3E10F0004AF20E /* ActivityDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailView.h; sourceTree = "<group>"; };
+		7A01EE971C3E10F0004AF20E /* ActivityDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailView.m; sourceTree = "<group>"; };
+		7A01EE991C3E1C21004AF20E /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		7A2B7BC01C3D3EEB00FFABF2 /* UIViewController+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Common.h"; path = "../../../UIViewController+Common.h"; sourceTree = "<group>"; };
 		7A2B7BC11C3D3EEB00FFABF2 /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Common.m"; path = "../../../UIViewController+Common.m"; sourceTree = "<group>"; };
 		7A83BA001C3A3AFB00A168D4 /* Pandas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +114,7 @@
 		7AB74AF51C3A4E2700F27D26 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7AB74AFA1C3A4E2700F27D26 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		7AB74AFB1C3A4E2700F27D26 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		7AB74B031C3A506300F27D26 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7AB74B031C3A506300F27D26 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Views/Main.storyboard; sourceTree = "<group>"; };
 		7AB74B051C3A507700F27D26 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		7AB74B071C3A50D000F27D26 /* Mine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mine.storyboard; sourceTree = "<group>"; };
 		7AB74C701C3A66F400F27D26 /* ft_found_normal_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ft_found_normal_ic@2x.png"; sourceTree = "<group>"; };
@@ -238,6 +253,7 @@
 				7AB4DCBC1C3CC06C00DDC072 /* GoodActivityViewController.h */,
 				7AB4DCBD1C3CC06C00DDC072 /* GoodActivityViewController.m */,
 				7AB4DCBF1C3CC07F00DDC072 /* HotActivityViewController.h */,
+				7AB74B031C3A506300F27D26 /* Main.storyboard */,
 				7AB4DCC01C3CC07F00DDC072 /* HotActivityViewController.m */,
 				7AB4DCB91C3CBFF400DDC072 /* ClassifyViewController.h */,
 				7AB4DCBA1C3CBFF400DDC072 /* ClassifyViewController.m */,
@@ -259,6 +275,7 @@
 				7AA9F5141C3BA477004A59FA /* Property List.plist */,
 				7AA9F5111C3BA073004A59FA /* MainModel.h */,
 				7AA9F5121C3BA073004A59FA /* MainModel.m */,
+				7A01EE991C3E1C21004AF20E /* File */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -266,10 +283,11 @@
 		7AB74AF71C3A4E2700F27D26 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7AB74B031C3A506300F27D26 /* Main.storyboard */,
 				7AB74C881C3A766A00F27D26 /* MainTableViewCell.h */,
 				7AB74C891C3A766A00F27D26 /* MainTableViewCell.m */,
 				7AB74C8A1C3A766A00F27D26 /* MainTableViewCell.xib */,
+				7A01EE961C3E10F0004AF20E /* ActivityDetailView.h */,
+				7A01EE971C3E10F0004AF20E /* ActivityDetailView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,6 +349,8 @@
 		7AB74C6F1C3A66F400F27D26 /* 30 2 */ = {
 			isa = PBXGroup;
 			children = (
+				7A01EE921C3E096A004AF20E /* list_make_out@2x.png */,
+				7A01EE8C1C3E0565004AF20E /* grayLine@2x.png */,
 				7AB74C701C3A66F400F27D26 /* ft_found_normal_ic@2x.png */,
 				7AB74C711C3A66F400F27D26 /* ft_found_normal_ic@3x.png */,
 				7AB74C721C3A66F400F27D26 /* ft_found_selected_ic@2x.png */,
@@ -350,6 +370,9 @@
 				7AA9F53D1C3BCEBF004A59FA /* home_icon_01@2x.png */,
 				7AA9F53E1C3BCEBF004A59FA /* home_icon_03@2x.png */,
 				7AB4DCAB1C3CB7BE00DDC072 /* pos@2x.png */,
+				7A01EE941C3E0B61004AF20E /* ac_details_img@2x.png */,
+				7A01EE8E1C3E073B004AF20E /* ac_location_normal@2x.png */,
+				7A01EE901C3E0741004AF20E /* phone@2x.png */,
 			);
 			path = "30 2";
 			sourceTree = "<group>";
@@ -449,12 +472,18 @@
 				7AA9F5401C3BCEBF004A59FA /* home_icon_02@2x.png in Resources */,
 				7AA9F5471C3BD147004A59FA /* home_01@2x.png in Resources */,
 				7AB74C811C3A66F400F27D26 /* ft_home_normal_ic@3x.png in Resources */,
+				7A01EE9A1C3E1C21004AF20E /* File in Resources */,
+				7A01EE931C3E096A004AF20E /* list_make_out@2x.png in Resources */,
+				7A01EE911C3E0741004AF20E /* phone@2x.png in Resources */,
 				7A83BA0A1C3A3AFB00A168D4 /* Assets.xcassets in Resources */,
 				7AB4DCAC1C3CB7BE00DDC072 /* pos@2x.png in Resources */,
 				7AB74C821C3A66F400F27D26 /* ft_home_selected_ic@2x.png in Resources */,
 				7AA9F5451C3BCEC6004A59FA /* home_zhuanti@2x.png in Resources */,
+				7A01EE951C3E0B61004AF20E /* ac_details_img@2x.png in Resources */,
 				7AB74C7C1C3A66F400F27D26 /* ft_found_normal_ic@2x.png in Resources */,
 				7AB74C861C3A66F400F27D26 /* ft_person_selected_ic@2x.png in Resources */,
+				7A01EE8D1C3E0565004AF20E /* grayLine@2x.png in Resources */,
+				7A01EE8F1C3E073B004AF20E /* ac_location_normal@2x.png in Resources */,
 				7AB74C7F1C3A66F400F27D26 /* ft_found_selected_ic@3x.png in Resources */,
 				7AB74C831C3A66F400F27D26 /* ft_home_selected_ic@3x.png in Resources */,
 				7AA9F5151C3BA477004A59FA /* Property List.plist in Resources */,
@@ -527,6 +556,7 @@
 				7AB4DCB51C3CBE7A00DDC072 /* ActivityDetailViewController.m in Sources */,
 				7A83BA051C3A3AFB00A168D4 /* main.m in Sources */,
 				7AB4DCAF1C3CBC1600DDC072 /* SelectCityViewController.m in Sources */,
+				7A01EE981C3E10F0004AF20E /* ActivityDetailView.m in Sources */,
 				7AB4DCB81C3CBF4700DDC072 /* ThemeDetailViewController.m in Sources */,
 				7AB4DCB21C3CBDA100DDC072 /* SreachViewController.m in Sources */,
 				7AB74AFF1C3A4E2700F27D26 /* MainViewController.m in Sources */,

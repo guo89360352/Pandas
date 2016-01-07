@@ -60,8 +60,7 @@
   
     leftbtn.tintColor=[UIColor whiteColor];
     self.navigationItem.leftBarButtonItem=leftbtn;
-      NSLog(@"itm ==== %@", self.navigationItem.leftBarButtonItem.title);
-    
+        
     
     //导航栏上navigationItem
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(seachActivity)];
@@ -324,13 +323,15 @@
 }
 
 //广告
--(void)touchAdvertisement:(UIButton *)adBtn{//?
+-(void)touchAdvertisement:(UIButton *)adBtn{
 
     //从数组中的字典里取出Type类型
     NSString *type = self.adArray[adBtn.tag-100][@"type"];
     if ([type integerValue] == 1) {
  
-        ActivityDetailViewController *activityVC = [[ActivityDetailViewController alloc] init];
+        UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        ActivityDetailViewController *activityVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"miss"];
         activityVC.activityId = self.adArray[adBtn.tag-100][@"id"];
         [self.navigationController pushViewController:activityVC animated:YES];
   
