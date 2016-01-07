@@ -289,35 +289,38 @@
 //精选活动
 -(void)goodActivity:(UIButton *)btn{
     GoodActivityViewController *good = [[GoodActivityViewController alloc] init];
-    [self.navigationController pushViewController:good animated:YES];
+    
+    [self.navigationController pushViewController:good animated:NO];
+    NSLog(@"******%@",good.navigationItem.leftBarButtonItem);
 
 }
 
 -(void)hotActivity:(UIButton *)btn{
 
     HotActivityViewController *hot= [[HotActivityViewController alloc] init];
-    [self.navigationController pushViewController:hot animated:YES];
+    [self.navigationController pushViewController:hot animated:NO];
 
 
 }
 -(void)mainActivity:(UIButton *)btn{
     
     ClassifyViewController *classify = [[ClassifyViewController alloc] init];
-    [self.navigationController pushViewController:classify animated:YES];
+    [self.navigationController pushViewController:classify animated:NO];
+      NSLog(@"******%@",classify.navigationItem.leftBarButtonItem);
 
     
 }
 //选择城市
 -(void)selectCity{
     SelectCityViewController *selectCityVC = [[SelectCityViewController alloc] init];
-    [self presentViewController:selectCityVC animated:YES completion:nil];
+    [self presentViewController:selectCityVC animated:NO completion:nil];
     
     
 }
 //搜索关键字
 -(void)seachActivity{
     SreachViewController *sreach = [[SreachViewController alloc] init];
-    [self.navigationController pushViewController:sreach animated:YES];
+    [self.navigationController pushViewController:sreach animated:NO];
 }
 
 //广告
