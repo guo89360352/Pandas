@@ -14,7 +14,10 @@
 
 
 @interface ActivityDetailViewController ()
-
+{
+    NSString *_phoneNumber;
+    
+}
 @property (strong, nonatomic) IBOutlet ActivityDetailView *activityDetailView;
 
 @end
@@ -25,14 +28,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"活动详情";
-   // [self showBackBtn];
+    [self showBackBtn];
    
+    //去地图页面
+    //打电话
+   [self.activityDetailView.makeCallButton addTarget:self action:@selector(makeCallButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self getModel];
     
     
 }
 #pragma mark ------------------  自定义方法
+//地图
+-(void)mapButtonAction:(UIButton *)btn{
+
+}
+//打电话
+-(void)makeCallButtonAction:(UIButton *)btn{
+    
+     //程序外打电话，打完电话不返回当前应用程序
+//    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",_phoneNumber]]];
+    
+    
+    
+    //程序内打电话，打完电话返回当前应用程序
+    UIWebView *cellPhoneWebView = [[UIWebView alloc] init];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",_phoneNumber]]] ;
+    [cellPhoneWebView loadRequest:request];
+    [self.view addSubview:cellPhoneWebView];
+                             
+    
+    
+    
+    
+    
+}
 
 -(void)getModel{
 
@@ -43,7 +74,7 @@
    
     
     [sessionManager GET:[NSString stringWithFormat:@"%@&id=%@",kActivity,self.activityId] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"%@",downloadProgress);
+     //   NSLog(@"%@",downloadProgress);
         
        
         
@@ -54,7 +85,7 @@
         if ([status isEqualToString:@"success"]&&code == 0) {
             NSDictionary *successDic = dic[@"success"];
             self.activityDetailView.dataDic = successDic;
-            
+             _phoneNumber = dic[@"tel"];
             
             
         }else {
