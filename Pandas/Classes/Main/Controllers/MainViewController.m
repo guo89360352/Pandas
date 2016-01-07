@@ -142,8 +142,11 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
-        
-    ActivityDetailViewController *act = [[ActivityDetailViewController alloc] init];
+        UIStoryboard *main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ActivityDetailViewController *act = [main instantiateViewControllerWithIdentifier:@"miss"];
+        //活动i
+        MainModel *model = self.listArray[indexPath.section][indexPath.row];
+        act.activityId = model.activityId;
     [self.navigationController pushViewController:act animated:YES];
     } else {
     
