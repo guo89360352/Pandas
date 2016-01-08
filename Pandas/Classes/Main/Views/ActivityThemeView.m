@@ -1,74 +1,53 @@
 //
-//  ActivityDetailView.m
+//  ActivityThemeView.m
 //  Pandas
 //
-//  Created by scjy on 16/1/7.
+//  Created by scjy on 16/1/8.
 //  Copyright © 2016年 苹果IOS. All rights reserved.
 //
 
-#import "ActivityDetailView.h"
+#import "ActivityThemeView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "HWTool.h"
-#import "UIView+Extenstin.h"
-#import "HWDefine.h"
-#import "PrefixHeader.pch"
-@interface ActivityDetailView ()
+
+@interface ActivityThemeView ()
 {
-//保存上一次图片底部的高度
+    //保存上一次图片底部的高度
     CGFloat _previousImageBottom;
-//上张图片的高度
+    //上张图片的高度
     CGFloat _previousImageHeight;
     
     CGFloat _lastLabelBottom;
 }
-@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
-@property (weak, nonatomic) IBOutlet UILabel *activityTitle;
-@property (weak, nonatomic) IBOutlet UILabel *activityTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *favouriteLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-
-
-
-
+@property (nonatomic, strong) UIScrollView *mainScrollView;
+@property (nonatomic, strong) UIImageView *headImageView;
 
 @end
 
+@implementation ActivityThemeView
 
-@implementation ActivityDetailView
-
--(void)awakeFromNib{
-
- self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, 10000);
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self configView];
+    }
+    return self;
 }
+-(void)configView{
+   
+    [self addSubview:  self.mainScrollView];
+    [self.mainScrollView addSubview:self.headImageView];
+    self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, 10000);
 
-
-//在set方法中赋值
+}
+//重写set方法，在这个方法中赋值
 -(void)setDataDic:(NSDictionary *)dataDic{
-    NSArray *urls = dataDic[@"urls"];
-    NSString *str = urls[0];
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:nil];
-    self.activityTitle.text = dataDic[@"title"];
-    //多少人喜欢
-    self.favouriteLabel.text = [NSString stringWithFormat:@"%@人喜欢",dataDic[@"fav"]];
-    //参考价格
-    self.priceLabel.text = [NSString stringWithFormat:@"价格参考：%@",dataDic[@"pricedesc"]];
-    //活动起止时间
-    NSString *startTime = [HWTool getDateFromString:dataDic[@"new_start_date"]];
-    NSString *endTime = [HWTool getDateFromString:dataDic[@"new_end_date"]];
-    
-    
-    
-    self.activityTimeLabel.text = [NSString stringWithFormat:@"%@ - %@",startTime,endTime];
-    //活动地址
-    self.activityAddressLabel.text = dataDic[@"address"];
-    //活动电话
-    self.activityPhoneLabel.text = dataDic[@"tel"];
-//活动详情
 
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"image"]] placeholderImage:nil];
+    
     [self drawContentWithArray:dataDic[@"content"]];
+
 }
-
-
 - (void)drawContentWithArray:(NSArray *)contentArray {
     for (NSDictionary *dic in contentArray) {
         //每一段活动信息
@@ -76,12 +55,12 @@
         CGFloat y;
         //460是指从广告图以及按钮等综合高度
         //460以下为详细介绍
-        if (_previousImageBottom > 460) { //如果图片底部的高度没有值（也就是小于500）,也就说明是加载第一个lable，那么y的值不应该减去500
+        if (_previousImageBottom > 186) { //如果图片底部的高度没有值（也就是小于500）,也就说明是加载第一个lable，那么y的值不应该减去500
             //上一个图片底部高度就是当前label的高度
-            y = 460 + _previousImageBottom - 460;
+            y = 186 + _previousImageBottom - 186;
         } else {
             
-            y = 460 + _previousImageBottom;
+            y = 186 + _previousImageBottom;
         }
         NSString *title = dic[@"title"];
         if (title != nil) {
@@ -138,7 +117,21 @@
             }
         }
     }
-self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _lastLabelBottom);
+    self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _lastLabelBottom);
 }
 
+-(UIScrollView *)mainScrollView{
+    if (_mainScrollView == nil) {
+        self.mainScrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+    
+    }
+    return _mainScrollView;
+}
+-(UIImageView *)headImageView{
+
+    if (_headImageView == nil) {
+        self.headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 186)];
+    }
+    return _headImageView;
+}
 @end

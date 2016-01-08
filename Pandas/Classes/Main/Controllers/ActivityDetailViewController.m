@@ -1,7 +1,7 @@
 //
 //  ActivityDetailViewController.m
 //  Pandas
-//
+//  活动详情
 //  Created by scjy on 16/1/6.
 //  Copyright © 2016年 苹果IOS. All rights reserved.
 //
@@ -9,8 +9,8 @@
 #import "ActivityDetailViewController.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "UIViewController+Common.h"
-//#import <MBProgressHUD.h>
 #import "ActivityDetailView.h"
+#import "AppDelegate.h"
 
 
 @interface ActivityDetailViewController ()
@@ -33,7 +33,8 @@
     //去地图页面
     //打电话
    [self.activityDetailView.makeCallButton addTarget:self action:@selector(makeCallButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    //隐藏tabBar
+    self.tabBarController.tabBar.hidden = YES;
     
     [self getModel];
     
@@ -68,25 +69,18 @@
 -(void)getModel{
 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    
-   
-    
     [sessionManager GET:[NSString stringWithFormat:@"%@&id=%@",kActivity,self.activityId] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-     //   NSLog(@"%@",downloadProgress);
         
-       
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-              NSDictionary *dic = responseObject;
+        NSDictionary *dic = responseObject;
         NSString *status = dic[@"status"];
         NSInteger code = [dic[@"code"] integerValue];
         if ([status isEqualToString:@"success"]&&code == 0) {
             NSDictionary *successDic = dic[@"success"];
             self.activityDetailView.dataDic = successDic;
              _phoneNumber = dic[@"tel"];
-            
             
         }else {
         

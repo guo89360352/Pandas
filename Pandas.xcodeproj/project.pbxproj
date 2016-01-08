@@ -23,6 +23,9 @@
 		7A83BA081C3A3AFB00A168D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83BA071C3A3AFB00A168D4 /* AppDelegate.m */; };
 		7A83BA0A1C3A3AFB00A168D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A83BA091C3A3AFB00A168D4 /* Assets.xcassets */; };
 		7A83BA0D1C3A3AFB00A168D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A83BA0B1C3A3AFB00A168D4 /* LaunchScreen.storyboard */; };
+		7AA92CF31C3F580100FDC38A /* MainList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA92CF21C3F580100FDC38A /* MainList.plist */; };
+		7AA92CF51C3F5D4200FDC38A /* ActivityTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA92CF41C3F5D4200FDC38A /* ActivityTheme.plist */; };
+		7AA92CF81C3F5EC000FDC38A /* ActivityThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA92CF71C3F5EC000FDC38A /* ActivityThemeView.m */; };
 		7AA9F50E1C3B9D21004A59FA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA9F50D1C3B9D21004A59FA /* AVFoundation.framework */; };
 		7AA9F5131C3BA073004A59FA /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F5121C3BA073004A59FA /* MainModel.m */; };
 		7AA9F5151C3BA477004A59FA /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AA9F5141C3BA477004A59FA /* Property List.plist */; };
@@ -88,6 +91,10 @@
 		7A83BA091C3A3AFB00A168D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A83BA0C1C3A3AFB00A168D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A83BA0E1C3A3AFB00A168D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AA92CF21C3F580100FDC38A /* MainList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainList.plist; sourceTree = "<group>"; };
+		7AA92CF41C3F5D4200FDC38A /* ActivityTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ActivityTheme.plist; path = ../Controllers/ActivityTheme.plist; sourceTree = "<group>"; };
+		7AA92CF61C3F5EC000FDC38A /* ActivityThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityThemeView.h; sourceTree = "<group>"; };
+		7AA92CF71C3F5EC000FDC38A /* ActivityThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityThemeView.m; sourceTree = "<group>"; };
 		7AA9F50D1C3B9D21004A59FA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7AA9F5111C3BA073004A59FA /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
 		7AA9F5121C3BA073004A59FA /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
@@ -289,10 +296,12 @@
 		7AB74AF61C3A4E2700F27D26 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7AA9F5141C3BA477004A59FA /* Property List.plist */,
 				7AA9F5111C3BA073004A59FA /* MainModel.h */,
 				7AA9F5121C3BA073004A59FA /* MainModel.m */,
 				7A01EE991C3E1C21004AF20E /* File */,
+				7AA9F5141C3BA477004A59FA /* Property List.plist */,
+				7AA92CF21C3F580100FDC38A /* MainList.plist */,
+				7AA92CF41C3F5D4200FDC38A /* ActivityTheme.plist */,
 				7A01EE9F1C3E5B0A004AF20E /* UIView+Extenstin.h */,
 				7A01EEA01C3E5B0A004AF20E /* UIView+Extenstin.m */,
 			);
@@ -308,6 +317,8 @@
 				7AB74C8A1C3A766A00F27D26 /* MainTableViewCell.xib */,
 				7A01EE961C3E10F0004AF20E /* ActivityDetailView.h */,
 				7A01EE971C3E10F0004AF20E /* ActivityDetailView.m */,
+				7AA92CF61C3F5EC000FDC38A /* ActivityThemeView.h */,
+				7AA92CF71C3F5EC000FDC38A /* ActivityThemeView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -497,6 +508,8 @@
 				7A01EE9A1C3E1C21004AF20E /* File in Resources */,
 				7A01EE931C3E096A004AF20E /* list_make_out@2x.png in Resources */,
 				7A01EE911C3E0741004AF20E /* phone@2x.png in Resources */,
+				7AA92CF51C3F5D4200FDC38A /* ActivityTheme.plist in Resources */,
+				7AA92CF31C3F580100FDC38A /* MainList.plist in Resources */,
 				7A83BA0A1C3A3AFB00A168D4 /* Assets.xcassets in Resources */,
 				7AB4DCAC1C3CB7BE00DDC072 /* pos@2x.png in Resources */,
 				7AB74C821C3A66F400F27D26 /* ft_home_selected_ic@2x.png in Resources */,
@@ -579,6 +592,7 @@
 				7AB4DCB51C3CBE7A00DDC072 /* ActivityDetailViewController.m in Sources */,
 				7A83BA051C3A3AFB00A168D4 /* main.m in Sources */,
 				7AB4DCAF1C3CBC1600DDC072 /* SelectCityViewController.m in Sources */,
+				7AA92CF81C3F5EC000FDC38A /* ActivityThemeView.m in Sources */,
 				7A01EE9E1C3E4C39004AF20E /* HWTool.m in Sources */,
 				7A01EE981C3E10F0004AF20E /* ActivityDetailView.m in Sources */,
 				7AB4DCB81C3CBF4700DDC072 /* ThemeDetailViewController.m in Sources */,

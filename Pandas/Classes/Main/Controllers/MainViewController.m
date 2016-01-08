@@ -140,23 +140,26 @@
 
 
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MainModel *model = self.listArray[indexPath.section][indexPath.row];
+
     if (indexPath.section==0) {
         UIStoryboard *main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ActivityDetailViewController *act = [main instantiateViewControllerWithIdentifier:@"miss"];
         //活动i
-        MainModel *model = self.listArray[indexPath.section][indexPath.row];
-        act.activityId = model.activityId;
+             act.activityId = model.activityId;
     [self.navigationController pushViewController:act animated:YES];
     } else {
     
         ThemeDetailViewController *theme =[[ThemeDetailViewController alloc] init];
+        theme.themeId = model.activityId;
         [self.navigationController pushViewController:theme animated:YES];
     
     }
 
 }
-#pragma mark ---- 自定义方法
+#pragma mark --------设置tableview的区头为scrollView和设置按钮
 
 //自定义tableview的区头
 -(void)configTableViewHeaderView{
@@ -227,7 +230,7 @@
     
 
 }
-#pragma mark ----   首页轮播图
+#pragma mark -----------------   首页轮播图
 - (void)startTimer{
 
     //防止定时器重复创建
@@ -241,14 +244,17 @@
 
 }
 - (void)rollAnimation{
+//数组元素个数可能为0，当对0取余时没有意义，
+    if (self.adArray.count > 0) {
+        //把当前page当前页加1
+        NSInteger page = (self.pageControl.currentPage + 1)% self.adArray.count;
+        self.pageControl.currentPage = page;
+        //计算出scrollView应该滚动的坐标
+        CGFloat offsetx = self.pageControl.currentPage * kScreenWidth;
+        [self.carouselView setContentOffset:CGPointMake(offsetx, 0) animated:YES];
 
-    //把当前page当前页加1
-    NSInteger page = (self.pageControl.currentPage + 1)% self.adArray.count;
-    self.pageControl.currentPage = page;
-    //计算出scrollView应该滚动的坐标
-    CGFloat offsetx = self.pageControl.currentPage * kScreenWidth;
-    [self.carouselView setContentOffset:CGPointMake(offsetx, 0) animated:YES];
-
+    }
+   
 }
 //当手动去滑动scrollView的时候，定时器仍然在计算时间，可能我们刚刚滑动到下一页，定时器时间刚好触发，导致在当前页停留的时间不到2秒
 //解决方案在scrollView开始移动的时候结束定时器
@@ -287,7 +293,7 @@
     self.carouselView.contentOffset = CGPointMake(pageNumber * pageWidth, 0);
     
 }
-
+#pragma mark -------  按钮或图片的点击方法
 //精选活动
 -(void)goodActivity:(UIButton *)btn{
     GoodActivityViewController *good = [[GoodActivityViewController alloc] init];
@@ -336,12 +342,13 @@
         
         ActivityDetailViewController *activityVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"miss"];
         activityVC.activityId = self.adArray[adBtn.tag-100][@"id"];
-        [self.navigationController pushViewController:activityVC animated:YES];
+       [self.navigationController pushViewController:activityVC animated:YES];
   
     }else {
     
-        HotActivityViewController *hot = [[HotActivityViewController alloc] init];
-        [self.navigationController pushViewController:hot animated:YES];
+        ThemeDetailViewController *theme = [[ThemeDetailViewController alloc] init];
+        theme.themeId = self.adArray[adBtn.tag -100][@"id"];
+        [self.navigationController pushViewController:theme animated:YES];
     
     }
 
@@ -416,7 +423,7 @@
     
 }
 
-//懒加载
+#pragma mark ---------- 懒加载
 -(NSMutableArray *)listArray{
     
     if (_listArray == nil) {
@@ -446,7 +453,11 @@
 
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.tabBarController.tabBar.hidden = NO;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     
     //UITableBarControllers
-    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+    self.tabBarVC = [[UITabBarController alloc] init];
  
     //创建被tabBarVC管理的视图控制器
     //主页
@@ -55,10 +55,10 @@
     UIImage *minesec =[UIImage imageNamed:@"ft_person_selected_ic"];
     mineNAV.tabBarItem.selectedImage = [minesec imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //添加被管理的视图控制器
-    tabBarVC.viewControllers = @[mainNAV,discoverNAV,mineNAV];
+    self.tabBarVC.viewControllers = @[mainNAV,discoverNAV,mineNAV];
     
     
-    self.window.rootViewController = tabBarVC;
+    self.window.rootViewController = self.tabBarVC;
 
     
     
