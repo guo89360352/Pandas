@@ -117,7 +117,7 @@
             }
         }
     }
-    self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _lastLabelBottom);
+    self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _previousImageBottom + 30);
 }
 
 -(UIScrollView *)mainScrollView{

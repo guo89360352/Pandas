@@ -10,7 +10,7 @@
 #import "PrefixHeader.pch"
 @interface HWTool : NSObject
 
-
++(NSDate *)getsystemNewDate;
 +(NSString *)getDateFromString:(NSString *)timestamp;
 
 +(CGFloat)getTextHeightWithText:(NSString *)text bigestSize:(CGSize)bigSize textFont:(CGFloat)font;

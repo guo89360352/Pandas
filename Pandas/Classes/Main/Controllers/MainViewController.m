@@ -17,7 +17,7 @@
 #import "ActivityDetailViewController.h"
 #import "ThemeDetailViewController.h"
 #import "ClassifyViewController.h"
-#import "GoodActivityViewController.h"
+#import "GoodViewController.h"
 #import "HotActivityViewController.h"
 #import "ActivityDetailViewController.h"
 
@@ -296,13 +296,12 @@
 #pragma mark -------  按钮或图片的点击方法
 //精选活动
 -(void)goodActivity:(UIButton *)btn{
-    GoodActivityViewController *good = [[GoodActivityViewController alloc] init];
+    GoodViewController *good = [[GoodViewController alloc] init];
     
     [self.navigationController pushViewController:good animated:NO];
-    NSLog(@"******%@",good.navigationItem.leftBarButtonItem);
 
 }
-
+//
 -(void)hotActivity:(UIButton *)btn{
 
     HotActivityViewController *hot= [[HotActivityViewController alloc] init];

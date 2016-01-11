@@ -22,6 +22,6 @@
 
 }
 - (void)backBtn{
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 @end

@@ -37,8 +37,8 @@
 @implementation ActivityDetailView
 
 -(void)awakeFromNib{
-
- self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, 10000);
+    
+    self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, 10000);
 }
 
 
@@ -138,7 +138,7 @@
             }
         }
     }
-self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _lastLabelBottom);
+self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, _lastLabelBottom + 10);
 }
 
 @end

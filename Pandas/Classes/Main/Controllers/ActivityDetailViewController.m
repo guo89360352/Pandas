@@ -11,6 +11,7 @@
 #import "UIViewController+Common.h"
 #import "ActivityDetailView.h"
 #import "AppDelegate.h"
+#import "GoodActivityModel.h"
 
 
 @interface ActivityDetailViewController ()
@@ -18,7 +19,11 @@
     NSString *_phoneNumber;
     
 }
+
 @property (strong, nonatomic) IBOutlet ActivityDetailView *activityDetailView;
+
+
+
 
 @end
 
@@ -29,10 +34,10 @@
     // Do any additional setup after loading the view.
     self.title = @"活动详情";
     [self showBackBtn];
-   
+    
     //去地图页面
     //打电话
-   [self.activityDetailView.makeCallButton addTarget:self action:@selector(makeCallButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+  // [self.activityDetailView.makeCallButton addTarget:self action:@selector(makeCallButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     //隐藏tabBar
     self.tabBarController.tabBar.hidden = YES;
     
@@ -94,8 +99,6 @@
 
 
 }
-
-
 
 
 
