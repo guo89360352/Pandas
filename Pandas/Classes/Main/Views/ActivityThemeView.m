@@ -38,7 +38,7 @@
     [self addSubview:  self.mainScrollView];
     [self.mainScrollView addSubview:self.headImageView];
     self.mainScrollView.contentSize = CGSizeMake(kScreenWidth, 10000);
-
+    self.mainScrollView.backgroundColor = [UIColor lightGrayColor];
 }
 //重写set方法，在这个方法中赋值
 -(void)setDataDic:(NSDictionary *)dataDic{
@@ -55,12 +55,12 @@
         CGFloat y;
         //460是指从广告图以及按钮等综合高度
         //460以下为详细介绍
-        if (_previousImageBottom > 186) { //如果图片底部的高度没有值（也就是小于500）,也就说明是加载第一个lable，那么y的值不应该减去500
+        if (_previousImageBottom > 195) { //如果图片底部的高度没有值（也就是小于500）,也就说明是加载第一个lable，那么y的值不应该减去500
             //上一个图片底部高度就是当前label的高度
-            y = 186 + _previousImageBottom - 186;
+            y = 195 + _previousImageBottom - 195;
         } else {
             
-            y = 186 + _previousImageBottom;
+            y = 195 + _previousImageBottom;
         }
         NSString *title = dic[@"title"];
         if (title != nil) {
@@ -91,7 +91,7 @@
                     //当lastImgbottom为0时是指该图片为此段落的第一张图片
                     if (lastImgbottom == 0.0) {
                         if (title != nil) { //有title的算上title的30像素
-                            imgY = _previousImageBottom + label.height + 30 + 5;
+                            imgY = _previousImageBottom + label.height + 30 + 5 ;
                         } else {
                             imgY = _previousImageBottom + label.height + 5;
                         }
@@ -110,7 +110,7 @@
                 [imageView sd_setImageWithURL:[NSURL URLWithString:urlDic[@"url"]] placeholderImage:nil];
                 [self.mainScrollView addSubview:imageView];
                 //每次都保留最新的图片底部高度
-                _previousImageBottom = imageView.bottom + 5;
+                _previousImageBottom = imageView.bottom + 5 + 10;
                 if (urlsArray.count > 1) {
                     lastImgbottom = imageView.bottom;
                 }

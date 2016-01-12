@@ -33,11 +33,11 @@
     
     [self showBackBtn];
     [self.view addSubview:self.tableView];
-    
+        self.listArray = [NSMutableArray new];
 //    self.tableView.tableFooterView = [[UIView alloc]init];
     [self loadData];
     [self.tableView registerNib:[UINib nibWithNibName:@"GoodActivityTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    
+    self.tabBarController.tabBar.hidden = YES;
     self.tableView.rowHeight = 90;
     [self.tableView launchRefreshing];
     
@@ -77,13 +77,14 @@
 #pragma mark----------PullingRefreshTableViewDelegate
 //tableView上拉开始刷新的时候调用
 -(void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView{
-    self.refreshing = NO;
+    self.refreshing = YES;
     _pageCount = 1;
     [self performSelector:@selector(loadData) withObject:nil afterDelay:1.0];
     
 }
 //下拉
 - (void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView{
+    self.refreshing = NO;
     _pageCount+=1;
     [self performSelector:@selector(loadData) withObject:nil afterDelay:1.0];
 }
@@ -107,19 +108,32 @@
         NSDictionary *dic = responseObject;
         NSString *status = dic[@"status"];
         NSInteger code = [dic[@"code"] integerValue];
-        self.listArray = [NSMutableArray new];
+    
         if ([status isEqualToString:@"success"] && code == 0) {
             NSDictionary *dict = dic[@"success"];
             NSArray *acArray = dict[@"acData"];
-            for (NSDictionary *acDic in acArray) {
-                GoodActivityModel *model = [[GoodActivityModel alloc]initWithDictionary:acDic];
-               [self.listArray addObject:model];
-//                NSLog(@"list = %@",self.listArray);
-            }
+          //  for (NSDictionary *acDic in acArray) {
+//                GoodActivityModel *model = [[GoodActivityModel alloc]initWithDictionary:acDic];
+                if (self.refreshing) {
+                    if (self.listArray.count > 0) {
+                        [self.listArray removeAllObjects];
+                        
+                    }
+
+                }
+                for (NSDictionary *dic in acArray) {
+                    GoodActivityModel *model = [[GoodActivityModel alloc] initWithDictionary:dic];
+                    [self.listArray addObject:model];
+                }
+              
+          
             [self.tableView tableViewDidFinishedLoading];
             self.tableView.reachedTheEnd = NO;
             [self.tableView reloadData];
             
+        }else{
+        
+        
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

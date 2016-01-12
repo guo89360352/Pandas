@@ -16,6 +16,9 @@
 #import "ThemeDetailViewController.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 @interface HotActivityViewController ()<UITableViewDataSource,UITableViewDelegate,PullingRefreshTableViewDelegate>
+{
+    NSInteger _pageCount;//请求的页码
+}
 @property(nonatomic,assign) BOOL refreshing;
 @property(nonatomic,strong) PullingRefreshTableView *tableView;
 @property(nonatomic,strong) NSMutableArray *listArray;
@@ -30,6 +33,9 @@
     self.title = @"热门活动";
     [self showBackBtn];
     [self.view addSubview:self.tableView];
+    self.listArray = [NSMutableArray new];
+    [self.tableView reloadData];
+    self.tabBarController.tabBar.hidden = YES;
     
     //    self.tableView.tableFooterView = [[UIView alloc]init];
  
@@ -73,12 +79,15 @@
 #pragma mark----------PullingRefreshTableViewDelegate
 //tableView上拉开始刷新的时候调用
 -(void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView{
-    self.refreshing = NO;
+    self.refreshing = YES;
+    _pageCount = 1;
     [self performSelector:@selector(requestModel) withObject:nil afterDelay:1.0];
     
 }
 //下拉
 - (void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView{
+    self.refreshing = NO;
+    _pageCount += 1;
     [self performSelector:@selector(requestModel) withObject:nil afterDelay:1.0];
 }
 
@@ -95,7 +104,7 @@
     
     AFHTTPSessionManager *sessionManage = [AFHTTPSessionManager manager];
     sessionManage.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [sessionManage GET:kHotActivity parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    [sessionManage GET:[NSString stringWithFormat:@"%@&page=%ld",kHotActivity,_pageCount]  parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         GYRLog(@"%lld",downloadProgress.totalUnitCount);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -108,26 +117,33 @@
             NSDictionary *dic = responseObject;
             NSString *status = dic[@"status"];
             NSInteger code = [dic[@"code"] integerValue];
-            self.listArray = [NSMutableArray new];
             if ([status isEqualToString:@"success"] && code == 0) {
                 NSDictionary *dict = dic[@"success"];
                 NSArray *acArray = dict[@"rcData"];
-                for (NSDictionary *acDic in acArray) {
-                    HotActivityModel *model = [[HotActivityModel alloc]initWithDictionary:acDic];
+                if (self.refreshing) {
+                    if (self.listArray.count > 0) {
+                        [self.listArray removeAllObjects];
+                        
+                    }
+                    
+                }
+                for (NSDictionary *dic in acArray) {
+                    HotActivityModel *model = [[HotActivityModel alloc] initWithDictionary:dic];
                     [self.listArray addObject:model];
-                 
                 }
                 [self.tableView tableViewDidFinishedLoading];
                 self.tableView.reachedTheEnd = NO;
+                
                 [self.tableView reloadData];
                 
-            
+            }else{
+                
+                
             }
         }
-            
-      //   GYRLog(@"%@",responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         GYRLog(@"%@",error);
     }];
     

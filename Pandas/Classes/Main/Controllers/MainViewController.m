@@ -20,6 +20,7 @@
 #import "GoodViewController.h"
 #import "HotActivityViewController.h"
 #import "ActivityDetailViewController.h"
+#import "GoodActivityModel.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
@@ -72,9 +73,10 @@
     [self configTableViewHeaderView];
     
     //请求网络数据
-    [self requestModel];
+   // [self requestModel];
     //启动定时器
     [self startTimer];
+ 
     
 }
 #pragma mark -- 设置tableview的代理方法UITableViewDataSource
@@ -154,6 +156,7 @@
     
         ThemeDetailViewController *theme =[[ThemeDetailViewController alloc] init];
         theme.themeId = model.activityId;
+        NSLog(@"%@",theme.themeId);
         [self.navigationController pushViewController:theme animated:YES];
     
     }
@@ -203,7 +206,7 @@
         btn.frame = CGRectMake(i * kScreenWidth / 4, 186, kScreenWidth / 4, kScreenWidth / 4);
         NSString *imageStr = [NSString stringWithFormat:@"home_icon_%02d",i + 1];
         [btn setImage:[UIImage imageNamed:imageStr] forState:UIControlStateNormal];
-        btn.tag = i;
+        btn.tag = i+100;
       
         [btn addTarget:self action:@selector(mainActivity:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableViewHeaderView addSubview:btn];
@@ -312,8 +315,10 @@
 -(void)mainActivity:(UIButton *)btn{
     
     ClassifyViewController *classify = [[ClassifyViewController alloc] init];
+    NSInteger num =btn.tag-100+1;
+    classify.classifyType = num;
     [self.navigationController pushViewController:classify animated:NO];
-      NSLog(@"******%@",classify.navigationItem.leftBarButtonItem);
+ 
 
     
 }

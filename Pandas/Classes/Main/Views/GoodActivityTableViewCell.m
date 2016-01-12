@@ -31,10 +31,10 @@
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:goodModel.image] placeholderImage:nil];
     self.activityTitleLabel.text = goodModel.title;
     self.activityPriceLabel.text = goodModel.price;
-    self.activityDistanceLabel.text = goodModel.description;
+    self.activityDistanceLabel.text = @"666km";
     self.ageLabel.text = goodModel.age;
 
-//    [self.loveCountButton setTitle:goodModel.counts forState:UIControlStateNormal];
+    [self.loveCountButton setTitle:[NSString stringWithFormat:@"%@",goodModel.counts] forState:UIControlStateNormal];
 //    if ([goodModel.type integerValue]!=) {
 //        self.loveCountButton.hidden = YES;
 //        
