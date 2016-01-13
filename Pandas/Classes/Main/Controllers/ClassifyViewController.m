@@ -44,11 +44,8 @@
     self.title = @"分类列表";
     [self showBackBtn];
     _pageCount = 1;
-//    self.showArray = [NSMutableArray new];
-//    self.showDataArray = [NSMutableArray new];
     [self.view addSubview:self.segementControl];
     [self.view addSubview:self.tableView];
-//    //第一次进入分类列表中，请求全部的接口数据
     [self.tableView registerNib:[UINib nibWithNibName:@"GoodActivityTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tabBarController.tabBar.hidden = YES;
     
@@ -84,7 +81,6 @@
     GoodActivityTableViewCell *goodCell = [self.tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     GoodActivityModel *model = self.showDataArray[indexPath.row];
-      NSLog(@"showData %@",self.showDataArray);
     goodCell.goodModel = model;
     return goodCell;
 }
@@ -349,8 +345,8 @@
         if (self.showDataArray.count > 0) {
             [self.showDataArray removeAllObjects];
         }
-
     }
+    
 
     switch (self.classifyType) {
         case ClassifyListTypeShowRepertoire:
@@ -364,7 +360,6 @@
         case ClassifyListTypeTouristPlace:
         {
             self.showDataArray = self.touristArray;
-             NSLog(@"showData %@",self.showDataArray);
         }
             break;
 
@@ -372,14 +367,12 @@
         {
             
             self.showDataArray = self.studyArray;
-             NSLog(@"showData %@",self.showDataArray);
         }
             break;
 
         case ClassifyListTypeFamilyTravel:
         {
             self.showDataArray = self.familyArray;
-             NSLog(@"showData %@",self.showDataArray);
             
         }
             break;

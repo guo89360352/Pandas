@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Discover-->
+        <!--发现-->
         <scene sceneID="MKW-Pu-2ox">
             <objects>
-                <viewController id="csg-Jn-PFX" customClass="DiscoverViewController" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="csg-Jn-PFX" customClass="DiscoverViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6i3-hV-rIW"/>
                         <viewControllerLayoutGuide type="bottom" id="eG6-Uz-cgK"/>
@@ -18,12 +18,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.71766070630775536" blue="0.67042876056699363" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Discover" id="pMT-dK-Ym6"/>
+                    <navigationItem key="navigationItem" title="发现" id="pMT-dK-Ym6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve3-CO-HLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1245.5" y="435.5"/>
+            <point key="canvasLocation" x="1095.5" y="434.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y6g-TD-qlW">
@@ -34,6 +34,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yh7-1Q-S03">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.057471447910000001" green="0.81030157660000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
