@@ -1,0 +1,13 @@
+//
+//  WeiBoViewController.h
+//  Pandas
+//
+//  Created by scjy on 16/1/13.
+//  Copyright © 2016年 苹果IOS. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface WeiBoViewController : UIViewController
+
+@end

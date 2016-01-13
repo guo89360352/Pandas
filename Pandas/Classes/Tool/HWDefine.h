@@ -17,6 +17,11 @@ typedef NS_ENUM(NSInteger,ClassifyListType) {
     ClassifyListTypeFamilyTravel //亲子旅游
 };
 
+//新浪微博分享
+#define kAppKey @"2914366036"
+#define kAppSecret @"d33a911690ac0f397bb4747110f336a2"
+#define kAppRedirectURL @"https://api.weibo.com/oauth2/default.html"
+
 #define RGB(x,y,z) [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
 #define mineColor [UIColor colorWithRed:95/255.0 green:185/255.0 blue:191/255.0 alpha:1.0]
 

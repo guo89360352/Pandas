@@ -9,6 +9,7 @@
 #import "MineViewController.h"
 #import <SDWebImage/SDImageCache.h>
 #import <MessageUI/MessageUI.h>
+#import "WeiboSDK.h"
 #import "ProgressHUD.h"
 
 @interface MineViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) UIButton *headerImageButton;
 @property (nonatomic, strong) NSArray *imageArray;
 @property (nonatomic, strong) NSMutableArray *titleArray;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic,strong)  UIView *shareView;
 @property (nonatomic, strong) UILabel *nikeNameLabel;
 
 @end
@@ -98,7 +101,7 @@
             break;
         case 2:
         {
-            
+            [self share];
         }
             break;
         case 3:
@@ -130,6 +133,67 @@
 #pragma mark ------- UITableViewDelegate
 
 #pragma mark ------- 自定义方法
+-(void)share{
+   self.window = [[UIApplication sharedApplication] .delegate window];
+    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight-350, kScreenWidth, 350)];
+    [self.window addSubview:self.shareView];
+   self.shareView.backgroundColor = [UIColor cyanColor];
+    
+    
+    
+  
+    
+[UIView  animateWithDuration:1.0 animations:^{
+    
+    UIButton *weiboBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    weiboBtn.frame = CGRectMake(20, 40, 35, 35);
+    [weiboBtn setImage:[UIImage imageNamed:@"ic_com_sina_weibo_sdk_logo"] forState:UIControlStateNormal];
+    [weiboBtn addTarget:self action:@selector(SendRequest) forControlEvents:UIControlEventTouchUpInside];
+    [ self.shareView addSubview:weiboBtn];
+    
+    
+    
+    UIButton *friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    friendBtn.frame = CGRectMake(130, 40, 70, 70);
+    [friendBtn setImage:[UIImage imageNamed:@"py_normal"] forState:UIControlStateNormal];
+    [self.shareView addSubview:friendBtn];
+    
+    
+    
+    UIButton *circleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    circleBtn.frame = CGRectMake(210, 40, 70, 70);
+    [circleBtn setImage:[UIImage imageNamed:@"py_normal"] forState:UIControlStateNormal];
+    [self.shareView addSubview:circleBtn];
+    
+    
+    
+    UIButton *removeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    removeBtn.frame = CGRectMake(20, 100, kScreenWidth-40, 44);
+    [removeBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [removeBtn addTarget:self action:@selector(goBacks) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareView addSubview:removeBtn];
+
+    
+}];
+
+
+}
+-(void)goBacks{
+
+    [self.shareView removeFromSuperview];
+   
+
+}
+-(void)SendRequest{
+   // self.navigationController pushViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#>
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI =kAppRedirectURL;
+    request.scope = @"all";
+    request.userInfo = @{@"登陆":@"",@"":@"",@"":@"",@"":@"",@"":@"",};
+    
+
+
+}
 -(void)checkAppVersion{
 
     [ProgressHUD showSuccess:@"=3="];
