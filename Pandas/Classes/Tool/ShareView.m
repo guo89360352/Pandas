@@ -63,6 +63,7 @@
     UIButton *circleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     circleBtn.frame = CGRectMake(230, 30, 60, 60);
     [circleBtn setImage:[UIImage imageNamed:@"py_normal"] forState:UIControlStateNormal];
+    [circleBtn addTarget:self action:@selector(lineTime) forControlEvents:UIControlEventTouchUpInside];
     [self.shareView addSubview:circleBtn];
     
     
@@ -73,14 +74,6 @@
     [removeBtn addTarget:self action:@selector(goBacks) forControlEvents:UIControlEventTouchUpInside];
     [self.shareView addSubview:removeBtn];
     
-    //    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //    cancelBtn.frame = CGRectMake(40, 40, 70, 70);
-    //    [cancelBtn setImage:[UIImage imageNamed:@"share_friend"] forState:UIControlStateNormal];
-    //    [cancelBtn addTarget:self action:@selector(cancelFF) forControlEvents:UIControlEventTouchUpInside];
-    //
-    //    [self.shareView addSubview:cancelBtn];
-    
-    
     
     [UIView  animateWithDuration:1.0 animations:^{
         
@@ -89,6 +82,29 @@
     }];
     
     
+
+
+
+}
+-(void)lineTime{
+//    WXMediaMessage *message = [WXMediaMessage message];
+//    [message setThumbImage:[UIImage imageNamed:@"Shamrock.png"]];
+//    WXImageObject *imageobject = [WXImageObject object];
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"Shamrock" ofType:@".png"];
+//    imageobject.imageData = [NSData dataWithContentsOfFile:filePath];
+//    message.mediaObject = imageobject;
+//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//    req.bText = NO;
+//    req.message = message;
+//    req.scene = WXSceneTimeline;
+//    [WXApi sendReq:req];
+    
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.text = @"这是一次测试微信分享的内容";
+    req.bText = YES;
+    req.scene = WXSceneTimeline;
+    [WXApi sendReq:req];
 
 
 
@@ -136,7 +152,7 @@
     
     
     
-   /*	AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+   	AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = kAppRedirectURL;
@@ -148,12 +164,10 @@
                          @"Other_Info_2": @[@"obj1", @"obj2"],
                          @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
     
-    [WeiboSDK sendRequest:request];*/
+    [WeiboSDK sendRequest:request];
     
 }
 -(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
-
-  
     
     GYRLog(@"%@",response);
 }
@@ -168,7 +182,7 @@
 {
     
     WBMessageObject *message = [WBMessageObject message];
-    message.text = @"你好";
+    message.text = @"这是一次测试微博分享的内容";
    
     
     

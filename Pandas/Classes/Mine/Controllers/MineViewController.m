@@ -16,7 +16,7 @@
 #import "WXApiObject.h"
 #import "ShareView.h"
 
-@interface MineViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
+@interface MineViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,WBHttpRequestDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *headerImageButton;
@@ -97,8 +97,8 @@
         case 1:
         {
             //发送邮件
-            [self sendEmail];
-            
+            //[self sendEmail];
+            [self cancelFF];
             
         }
             break;
@@ -162,12 +162,29 @@
     
    }
 -(void)cancelFF{
+    
+    AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+   
+    NSMutableDictionary * param = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [param setObject:appdelegate.wbtoken forKey:@"access_token"];
+    [param setObject:appdelegate.wbCurrentUserID forKey:@"uid"];
+    
+    NSString * userInfoUrl = @"https://api.weibo.com/oauth2/default.html";
+    
+    [WBHttpRequest requestWithAccessToken:appdelegate.wbtoken url:userInfoUrl httpMethod:@"GET" params:param delegate:self withTag:@"userInfo"];
 
-
+}
+-(void)request:(WBHttpRequest *)request didFinishLoadingWithDataResult:(NSData *)data{
+    //此处不需要使用导入第三方SBJson去解析data也可以
+    id d = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary * dict =  (NSDictionary *)d;
+    //    NSLog(@"dict:%@",dict);
+   NSString *nameStr = [dict objectForKey:@"name"];
+     NSString *imageUrlStr = [dict objectForKey:@"profile_image_url"];
+    NSLog(@"name:%@,urlStr:%@",nameStr,imageUrlStr);
 
 
 }
-
 -(void)checkAppVersion{
 
     [ProgressHUD showSuccess:@"=3="];
@@ -280,6 +297,7 @@
    
 
 }
+
 -(UITableView *)tableView{
 
     if (_tableView == nil) {

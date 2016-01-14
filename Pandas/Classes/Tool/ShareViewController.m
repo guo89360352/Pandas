@@ -11,7 +11,8 @@
 
 @interface ShareViewController ()
 
-@property (nonatomic, copy) UITextField *textView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 
 @end
 
