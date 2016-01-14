@@ -10,7 +10,11 @@
 #import <SDWebImage/SDImageCache.h>
 #import <MessageUI/MessageUI.h>
 #import "WeiboSDK.h"
+#import "AppDelegate.h"
 #import "ProgressHUD.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "ShareView.h"
 
 @interface MineViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
 
@@ -19,7 +23,9 @@
 @property (nonatomic, strong) NSArray *imageArray;
 @property (nonatomic, strong) NSMutableArray *titleArray;
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic,strong)  UIView *shareView;
+@property (nonatomic,strong)  ShareView *shareView;
+@property (nonatomic,strong)  UIView *blockView;
+
 @property (nonatomic, strong) UILabel *nikeNameLabel;
 
 @end
@@ -40,9 +46,10 @@
     self.imageArray = @[@"icon_ac",@"icon_msg",@"icon_ordered",@"icon_shop",@"icon_user"];
     [self setUpTableViewHeaderView];
 }
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+    //当页面将要出现的时候重新计算页面的大小
     SDImageCache *cashes = [SDImageCache sharedImageCache];
+    
     NSInteger casheSize = [cashes getSize];
     NSString *cacheStr = [NSString stringWithFormat:@"清除图片缓存大小(%.02fM)",(float)casheSize/1024/1024];
     [self.titleArray replaceObjectAtIndex:0 withObject:cacheStr];
@@ -80,14 +87,10 @@
     switch (indexPath.row) {
         case 0:
         {
+            [ProgressHUD show:@"正在清理中"];
+            [self performSelector:@selector(clearImage) withObject:nil afterDelay:1.0];
           
-          
-        GYRLog(@"%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES));
-            SDImageCache *imageCache = [SDImageCache sharedImageCache];
-            [imageCache clearDisk];
-            [self.titleArray replaceObjectAtIndex:0 withObject:@"清除图片缓存"];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+       
         
         }
             break;
@@ -102,6 +105,10 @@
         case 2:
         {
             [self share];
+            
+            
+            
+            
         }
             break;
         case 3:
@@ -130,70 +137,37 @@
 
 }
 
+
+-(void)clearImage{
+    [ProgressHUD showSuccess:@"清理成功"];
+
+    GYRLog(@"%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES));
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache clearDisk];
+    [self.titleArray replaceObjectAtIndex:0 withObject:@"清除图片缓存"];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+}
 #pragma mark ------- UITableViewDelegate
 
 #pragma mark ------- 自定义方法
 -(void)share{
-   self.window = [[UIApplication sharedApplication] .delegate window];
-    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight-350, kScreenWidth, 350)];
-    [self.window addSubview:self.shareView];
-   self.shareView.backgroundColor = [UIColor cyanColor];
-    
-    
-    
-  
-    
-[UIView  animateWithDuration:1.0 animations:^{
-    
-    UIButton *weiboBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    weiboBtn.frame = CGRectMake(20, 40, 35, 35);
-    [weiboBtn setImage:[UIImage imageNamed:@"ic_com_sina_weibo_sdk_logo"] forState:UIControlStateNormal];
-    [weiboBtn addTarget:self action:@selector(SendRequest) forControlEvents:UIControlEventTouchUpInside];
-    [ self.shareView addSubview:weiboBtn];
-    
-    
-    
-    UIButton *friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    friendBtn.frame = CGRectMake(130, 40, 70, 70);
-    [friendBtn setImage:[UIImage imageNamed:@"py_normal"] forState:UIControlStateNormal];
-    [self.shareView addSubview:friendBtn];
-    
-    
-    
-    UIButton *circleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    circleBtn.frame = CGRectMake(210, 40, 70, 70);
-    [circleBtn setImage:[UIImage imageNamed:@"py_normal"] forState:UIControlStateNormal];
-    [self.shareView addSubview:circleBtn];
-    
-    
-    
-    UIButton *removeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    removeBtn.frame = CGRectMake(20, 100, kScreenWidth-40, 44);
-    [removeBtn setTitle:@"取消" forState:UIControlStateNormal];
-    [removeBtn addTarget:self action:@selector(goBacks) forControlEvents:UIControlEventTouchUpInside];
-    [self.shareView addSubview:removeBtn];
-
-    
-}];
-
-
-}
--(void)goBacks{
-
-    [self.shareView removeFromSuperview];
    
-
-}
--(void)SendRequest{
-   // self.navigationController pushViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#>
-    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI =kAppRedirectURL;
-    request.scope = @"all";
-    request.userInfo = @{@"登陆":@"",@"":@"",@"":@"",@"":@"",@"":@"",};
+   self.shareView = [[ShareView alloc] init];
+    [self.view addSubview:self.shareView];
     
+    
+    
+    
+   }
+-(void)cancelFF{
+
+
 
 
 }
+
 -(void)checkAppVersion{
 
     [ProgressHUD showSuccess:@"=3="];
@@ -302,7 +276,8 @@
 
 }
 -(void)login{
-
+    
+   
 
 }
 -(UITableView *)tableView{

@@ -8,12 +8,24 @@
 
 #import "AppDelegate.h"
 #import "WeiboSDK.h"
+#import "WXApiObject.h"
+#import "WXApi.h"
 
-@interface AppDelegate ()<WeiboSDKDelegate>
+@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
+@property(retain,nonatomic)UINavigationController *nav;
 
+@end
+@interface WBBaseRequest ()
+-(void)debugPrint;
+@end
+@interface WBBaseResponse ()
+-(void)debugPrint;
 @end
 
 @implementation AppDelegate
+@synthesize wbtoken;
+@synthesize wbCurrentUserID;
+@synthesize wbRefreshToken;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -21,6 +33,9 @@
     
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:kAppKey];
+    
+    
+    [WXApi registerApp:@"wxd59a15de92d6a502"];
     
     
     
@@ -62,30 +77,54 @@
     mineNAV.tabBarItem.selectedImage = [minesec imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //添加被管理的视图控制器
     self.tabBarVC.viewControllers = @[mainNAV,discoverNAV,mineNAV];
-    
-    
     self.window.rootViewController = self.tabBarVC;
-
-    
-    
-    
-    
-    
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
+    
 }
+-(void) onReq:(BaseReq*)req
+{
+   }
+
+-(void) onResp:(BaseResp*)resp
+{
+}
+
+
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-
-    return [WeiboSDK handleOpenURL:url delegate:self];
-
+    if([WeiboSDK isCanSSOInWeiboApp]){
+        
+        return [WeiboSDK handleOpenURL:url delegate:self];
+        
+    }
+    return [WXApi handleOpenURL:url delegate:self];
 }
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+  
+    if([WeiboSDK isCanSSOInWeiboApp]){
+        
+     return [WeiboSDK handleOpenURL:url delegate:self];
+        
+    }
+    
 
-    return [WeiboSDK handleOpenURL:url delegate:self];
+    return [WXApi handleOpenURL:url delegate:self];
+
+
 
 }
+-(void)didReceiveWeiboRequest:(WBBaseRequest *)request{
+    
+}
+-(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
+    
+    
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
